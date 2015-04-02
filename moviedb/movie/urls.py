@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from movie.views import placeholder
+from movie.views.user_view import placeholder
 
 urlpatterns = patterns('',
     url(r'^login$', placeholder, name='login'),
