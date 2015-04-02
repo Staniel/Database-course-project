@@ -61,9 +61,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'MovieDB',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'ly2328',
+        'PASSWORD': 'columbia4111',
+        'HOST': 'cs4111.chgh9mmogaje.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
