@@ -4,4 +4,4 @@ from django.http import HttpResponse
 def main(request):
 	xx = None
 	context = {'xxx': xx}
-	return render(request, 'main.html', context)
+	return render(request, 'movie/main.html', context)

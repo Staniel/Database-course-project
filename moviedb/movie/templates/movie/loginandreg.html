@@ -1,0 +1,43 @@
+
+{% extends 'movie/base.html' %}
+{% block main %}
+{% load staticfiles %}
+<div class="container">
+<div id="content-main">
+<form action="{% url 'moviedb:login'%}" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
+  <div class="form-row">
+    
+    <label class="required" for="id_username">Username:</label> <input id="id_username" maxlength="254" name="username" type="text" />
+  </div>
+  <div class="form-row">
+    
+    <label class="required" for="id_password">Password:</label> <input id="id_password" name="password" type="password" />
+    <input type="hidden" name="next" value="/admin/" />
+  </div>
+  {% if msg %}
+    <p>{{msg}}</p>
+  {%endif%}
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="Login" />
+  </div>
+</form>
+</div>
+
+<div id="content-main">
+<form action="{% url 'moviedb:register'%}" method="post" id="register-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
+  <div class="form-row">
+    
+    <label class="required" for="id_username">Username:</label> <input id="id_username" maxlength="254" name="username" type="text" />
+  </div>
+  <div class="form-row">
+    
+    <label class="required" for="id_password">Password:</label> <input id="id_password" name="password" type="password" />
+    <input type="hidden" name="next" value="/admin/" />
+  </div>
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="Register" />
+  </div>
+</form>
+</div>
+</div>
+{% endblock %}

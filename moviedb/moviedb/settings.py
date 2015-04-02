@@ -71,6 +71,11 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
+#Authentication backends
+AUTHENTICATION_BACKENDS = (
+        'django.contrib.auth.backends.ModelBackend',
+    )
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
