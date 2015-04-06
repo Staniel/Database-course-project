@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     url(r'^$', MainView.main, name='main'),
 
     url(r'^login/$', UserView.userlogin, name='login'),
-    url(r'^logout/$', UserView.logout, name='logout'),
+    url(r'^logout/$', UserView.userlogout, name='logout'),
     url(r'^register/$', UserView.register, name='register'),
     url(r'^updateinfo/$', UserView.updateinfo, name='updateinfo'),
     url(r'^user/(?P<userid>[0-9]+)/$', UserView.user, name='user'),

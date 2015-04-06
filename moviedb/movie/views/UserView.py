@@ -12,16 +12,18 @@ def userlogin(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return render(request, 'movie/main.html')
+				context = {'username': user.username}
+				return render(request, 'movie/main.html', context)
 		context = {'msg': "wrong username or password"}
 		return render(request, 'movie/loginandreg.html', context)
 	else:
 		return render(request, 'movie/loginandreg.html')
 	
 
-def logout(request):
+def userlogout(request):
 	print "welcome to logout"
 	logout(request)
+	# return render(request, 'movie/loginandreg.html')
 	return redirect('moviedb:login')
 def register(request):
 	print "welcome to register"
