@@ -9,6 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
      <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{{STATIC_URL}}login.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
 
@@ -26,11 +27,17 @@
    <title>{% block title %}MovieDB, find the movie  {% endblock %}</title>
  </head>
  <body>
-  <h1>MovieDB</h1>
-   {% block main %}{% endblock %}
-
+  <div id="wrap">
+    <div id="main" class="container clear-top">
+      <div class="container">
+        <h1 align="center">MovieDB</h1>
+      </div>
+      {% block main %}{% endblock %}
+    </div>
+  </div>
+  
  </body>
  <div class="row footer col-md-offset-5">
-       <p>some footer</p>
+       <p>CS4111 project, Lixin Yao, Di Li</p>
   </div>
 </html>
