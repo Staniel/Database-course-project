@@ -36,6 +36,9 @@
     <label class="required" for="id_password">Password:</label> <input id="id_password" name="password" type="password" />
     <input type="hidden" name="next" value="/admin/" />
   </div>
+  {% if registermsg %}
+    <p>{{registermsg}}</p>
+  {%endif%}
   <div class="submit-row">
     <label>&nbsp;</label><input type="submit" value="Register" />
   </div>

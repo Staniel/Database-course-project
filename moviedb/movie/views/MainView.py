@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-# Create your views here.
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def main(request):
-	
-	if not request.user.is_authenticated():
-		return redirect('moviedb:login')
 	context = {'username': request.user.username}
 	return render(request, 'movie/main.html', context)
