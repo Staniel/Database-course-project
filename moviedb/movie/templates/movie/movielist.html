@@ -1,0 +1,76 @@
+{% extends "movie/navbar.html" %}
+
+{% block content %}
+    <div class="col-md-2">
+        <h3><span>Filters</span></h3>
+        <form role="form" class="search">
+            <!-- here need to deal with parameter of user -->
+            <div class="form-group">
+                <label for="destinationfilter">Movie name</label>
+                <input type="text" class="form-control" id="moviefilter" placeholder="Enter movie name">
+            </div>
+            <div class="form-group">
+                <label for="departfilter">Director</label>
+                <input type="text" class="form-control" id="directorfilter" placeholder="Enter director name">
+            </div>
+            <div class="form-group">
+                <label for="returnfilter">Stars</label>
+                <input type="text" class="form-control" id="starfilter" placeholder="Enter star name">
+            </div>
+            <button id="searchbutton" type="submit" class="btn btn-primary">Search Movies</button>
+        </form>
+   
+    </div>
+    <div class="col-md-10">
+         <br/>
+    <div class="panel panel-primary">
+        <!-- Default panel contents -->
+        <div class="panel-heading">{{list_title}}</div>
+
+            {% if plan_list.0 %}
+            <table id="plantable" class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Destination</td>
+                    <td>Depart Time</td>
+                    <td>Return Time</td>
+                    <td>Holder</td>
+                    <td>Max Traveller</td>
+                </tr>
+                </thead>
+                <!-- <tfoot>
+            <tr>
+                <th>Destination</th>
+                <th>Depart Time</th>
+                <th>Return Time</th>
+                <th>Holder</th>
+                <th>Max Traveller</th>
+            </tr>
+        </tfoot> -->
+                <tbody>
+                {% for plan in plan_list %}
+                <tr class="plan_tr">
+                    <td class="plan_dest"><a href="/travelplans/view_plan_detail/{{plan.id}}/">{{ plan.destination }}</a></td>
+                    <td class="plan_dep">{{ plan.depart_time | date:"m-d-Y" }}</td>
+                    <td class="plan_ret">{{ plan.return_time | date:"m-d-Y"}}</td>
+                    <td class="plan_holder">
+{% if plan.holder.first_name %}
+{{ plan.holder.first_name }} {{ plan.holder.last_name }}</td>
+{% endif %}
+{% ifequal plan.holder.first_name ''%}
+{{plan.holder}}
+{% endifequal %}
+                    <td class="plan_limit">{{plan.limit}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+            </table>
+            {% else %}
+            <p>No movies are available.</p>
+            {% endif %}
+    </div>
+    </div>
+
+{% endblock %}
+

@@ -1,7 +1,7 @@
 
 {% extends 'movie/base.html' %}
 {% block main %}
-
+<div  class="container-fluid">
 <nav class="row navbar-custom">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,6 +31,11 @@
             </ul>
           </div><!--/.nav-collapse -->
       </nav>
-
+      <div class="row" id="updatecontent">
+        {% block content %}{% endblock %}
+      </div>
+    <br/>
+    <br/>
+    </div> <!-- /container -->
 <!-- <a href="/login/?next={{ request.path }}">test login</a> -->
 {% endblock %}

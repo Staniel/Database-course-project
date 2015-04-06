@@ -7,4 +7,4 @@ def main(request):
 	context = {'username': "visitor"}
 	if request.user.username:
 		context = {'username': request.user.username, 'loggedin': True}
-	return render(request, 'movie/main.html', context)
+	return render(request, 'movie/movielist.html', context)
