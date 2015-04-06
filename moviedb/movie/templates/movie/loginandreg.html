@@ -3,11 +3,14 @@
 {% block main %}
 {% load staticfiles %}
 <div class="container">
+        <h1 align="center">MovieDB</h1>
+      </div>
+<div class="container">
   <div>
     <img id="frontpic" src="{{STATIC_URL}}front.jpg" alt="Movie picture" width=300 height=150 >
   </div>
 
-<div id="content-main" class="col-md-7">
+<div id="content-main" class="col-md-8">
 <form action="{% url 'moviedb:register'%}" method="post" id="register-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
   {% csrf_token %}
   <div class="form-row">
@@ -28,7 +31,7 @@
 </form>
 </div>
 
-<div id="content-main" class="col-md-5">
+<div id="content-main" class="col-md-4">
 <form action="{% url 'moviedb:login'%}" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
   {% csrf_token %}
   <div class="form-row">
