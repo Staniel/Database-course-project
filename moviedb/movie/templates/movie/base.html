@@ -1,7 +1,7 @@
 <!DOCTYPE html>
+
 {% load staticfiles %}
 {% load static %}
-{% extends 'movie/navbar.html' %}
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,27 +31,8 @@
 </head>
 <body>
   <header class="navbar navbar-static-top" role="banner">
-
-    {% block navbar %}
-    <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="{% url 'moviedb:main' %}" class="navbar-brand">MovieDB</a>
-      </div>
-
-      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <ul class="nav navbar-nav">
-          <li><a href="{% url 'moviedb:main' %}">Home</a></li>
-          <li><a href="#">User</a></li>
-        </ul>
-      </nav>
-    </div>
-    {% endblock %}
+    
+    {% include 'movie/navbar.html' %}
     
     <div class="jumbotron">
       <div class="container">
@@ -63,7 +44,7 @@
 
   <div id="content">
     <div class="container">
-      {% block main %}{% endblock %}
+      {% block content %}{% endblock %}
     </div>
   </div>
 
