@@ -2,8 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 # Create your views here.
 def movie(request, mid):
-	
-
 	return HttpResponse("hello world")
 
 def watchmovie(request):

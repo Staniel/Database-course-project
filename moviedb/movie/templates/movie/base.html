@@ -12,8 +12,9 @@
   <meta name="author" content="">
   <link rel="icon" href="http://getbootstrap.com/favicon.ico">
      <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/base.css">
+  
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/login.css">
+  <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/base.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
   <!-- Optional theme -->
@@ -36,7 +37,7 @@
     {% include 'movie/navbar.html' %}
     {% endblock %}
     
-    <div class="jumbotron">
+    <div class="jumbotron" id="flyer">
       <div class="container">
       <h1>MovieDB</h1>
       <p>Explore movies here, and discuss!</p>

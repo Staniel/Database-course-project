@@ -11,8 +11,7 @@ def userlogin(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				context = {'username': user.username, 'loggedin': True}
-				return render(request, 'movie/movielist.html', context)
+				return redirect('moviedb:main')
 		context = {'msg': "wrong username or password"}
 		return render(request, 'movie/loginandreg.html', context)
 	else:
