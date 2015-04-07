@@ -32,7 +32,9 @@
 <body>
   <header class="navbar navbar-static-top" role="banner">
     
+    {% block navbar %}
     {% include 'movie/navbar.html' %}
+    {% endblock %}
     
     <div class="jumbotron">
       <div class="container">

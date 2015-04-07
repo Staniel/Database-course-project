@@ -1,32 +1,30 @@
-{% block navbar %}
 <div class="container">
-      <div class="navbar-header">
-        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="{% url 'moviedb:main' %}" class="navbar-brand">MovieDB</a>
-      </div>
+  <div class="navbar-header">
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="{% url 'moviedb:main' %}" class="navbar-brand">MovieDB</a>
+  </div>
 
-      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-        <ul id="plantab" class="nav navbar-nav">
-          <li id="allmovie"><a href="{% url 'moviedb:main' %}">All Movies</a></li>
-          {% if loggedin %}
-          <li><a href="#">My favorite movie</a></li> 
-          <li><a href="#">My watched movie</a></li> 
-          {%endif%}
-          <li><a href="#">Discuss board</a></li> 
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Welcome, {{username}}</a></li>
-          {% if loggedin %}
-          <li><a href="{% url 'moviedb:logout' %}?next={{ '/login' }}">Logout </a></li> 
-          {% else %}
-           <li><a href="{% url 'moviedb:login' %}">Login </a></li> 
-          {%endif%}
-        </ul>
-      </nav>
-    </div>
-{% endblock %}
+  <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+    <ul id="plantab" class="nav navbar-nav">
+      <li id="allmovie"><a href="{% url 'moviedb:main' %}">All Movies</a></li>
+      {% if loggedin %}
+      <li><a href="#">My favorite movie</a></li> 
+      <li><a href="#">My watched movie</a></li> 
+      {%endif%}
+      <li><a href="#">Discuss board</a></li> 
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Welcome, {{username}}</a></li>
+      {% if loggedin %}
+      <li><a href="{% url 'moviedb:logout' %}?next={{ '/login' }}">Logout </a></li> 
+      {% else %}
+       <li><a href="{% url 'moviedb:login' %}">Login </a></li> 
+      {%endif%}
+    </ul>
+  </nav>
+</div>
