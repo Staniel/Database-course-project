@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^user/(?P<userid>[0-9]+)/$', UserView.user, name='user'),
 
     url(r'^movie/(?P<movieid>[0-9]+)/$', MovieView.movie, name='movie'),
+    url(r'^movie/review/(?P<movieid>[0-9]+)/$', MovieView.reviewmovie, name='reviewmovie'),
     url(r'^movie/watch/$', MovieView.watchmovielist, name='watchmovielist'),
     url(r'^movie/watch/add/(?P<movieid>[0-9]+)/$', MovieView.watchmovie, name='watchmovie'),
     url(r'^movie/watch/delete/(?P<movieid>[0-9]+)/$', MovieView.unwatchmovie, name='unwatchmovie'),

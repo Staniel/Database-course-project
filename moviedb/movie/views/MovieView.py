@@ -22,6 +22,12 @@ def movie(request, movieid):
 def watchmovielist(request):
 	return HttpResponse("hello world")
 
+
+@login_required
+def reviewmovie(request, movieid):
+	return HttpResponse("hello world")
+
+
 @login_required
 def watchmovie(request, movieid):
 	return HttpResponse("hello world")

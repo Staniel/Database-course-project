@@ -1,11 +1,81 @@
 {% extends "movie/base.html" %}
 {% block content %}
-
-	<h1>{{movie.name}}</h1>
-	<p>{{movie.runtime}}</p>
-
+	<h1>
+        <span >{{movie.name}}</span>
+         <span >(2014)</span>
+    </h1>
+<div id="info">
+        <span ><span>Director</span>: <span>Lixin Yao</span></span><br/>
+        <span ><span>Actor</span>: 
+        <span >AAA / BBB</span></span><br/>
+        <span >Genre:</span> <span>Comic</span> / <span >Action</span> <br/>
+        <span >Release Info:</span> <span>2015-03-27(China Mainland)</span> / <span>2015-01-29(England)</span><br/>
+        <span >Runtime:</span> <span>{{movie.runtime}} mins</span> <br/>      
+        <div >
+            <h2>Storyline of {{movie.name}}&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·</h2>
+            <div >
+                <span >
+                    {{movie.storyline}}
+                <br />
+                <br />
+                </span>  
+            </div>
+        </div>
+    </div>
+	  {% if loggedin %}
+<form action="{% url 'moviedb:reviewmovie' movie.id%} " id="reviewform">
+  </br>
+  <h2>give your rating and review for this movie!</h2>
+  Rating:   
+  <select name="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+</br>
+</br>
+  <textarea rows="4" cols="50" name="review" placeholder="Enter your review here...">
+</textarea>
+</br>
+  <input type="submit" value="Submit">
+</form>
+<br>
+      {% else %}
+      <h2>Login to rate and write review to the movie</h2>
+      {%endif%}
+ 		<h2>
+        	<i >Short review for {{movie.name}}</i>
+              · · · · · ·
+    	</h2>
+    <div id="commentlist">    
+        <div>
+            <h4>
+                <span>
+                    <span >Di Li</span>
+                    <span >2015-01-23</span>
+                    <span>Rating: 9</span>
+                </span>
+            </h4>
+            <p> Best movie ever!</p>
+        </div>
+        <div>
+            <h4>
+                <span>
+                    <span >Obama</span>
+                    <span >2015-01-24</span>
+                    <span>Rating: 10</span>
+                </span>
+            </h4>
+            <p> I like it!</p>
+        </div>
+    </div>
 {% endblock %}
-
 {% block flyer %}
-
 {% endblock %}
