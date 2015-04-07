@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
-import urllib2
+
 # Create your views here.
 def userlogin(request):
 	next = ""
@@ -16,8 +16,6 @@ def userlogin(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				
-				# url_with_get = urllib2.unquote(request.GET.get('next'))
 				if next == "":
 					return redirect('moviedb:main')
 				else:
