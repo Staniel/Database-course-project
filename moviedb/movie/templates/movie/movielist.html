@@ -2,32 +2,9 @@
 
 {% block content %}
 
-    <!-- <div class="col-md-2">
-        <h3><span>Filters</span></h3>
-        <form role="form" class="search">
-            <div class="form-group">
-                <label for="destinationfilter">Movie name</label>
-                <input type="text" class="form-control" id="moviefilter" placeholder="Enter movie name">
-            </div>
-            <div class="form-group">
-                <label for="departfilter">Director</label>
-                <input type="text" class="form-control" id="directorfilter" placeholder="Enter director name">
-            </div>
-            <div class="form-group">
-                <label for="returnfilter">Stars</label>
-                <input type="text" class="form-control" id="starfilter" placeholder="Enter star name">
-            </div>
-            <button id="searchbutton" type="submit" class="btn btn-primary">Search Movies</button>
-        </form>
-   
-    </div>
- -->
     <div>
-         <!-- <br/> -->
     <div class="panel panel-primary">
-        <!-- Default panel contents -->
         <div class="panel-heading">{{title}}</div>
-
             {% if movielist.0 %}
             <table id="movietable" class="table table-striped">
                 <thead>
@@ -42,8 +19,7 @@
                 <tbody>
                 {% for movie in movielist %}
                 <tr class="movie_tr">
-                    <td class="moviedetail"><a href="{% url 'moviedb:movie' 
-                        {{movie.id}} %}">{{ movie.name }}</a></td>
+                    <td class="moviedetail"><a href="/movie/{{movie.id}}/">{{ movie.name }}</a></td>
                     <td class="Director">LixinYao</td>
                     <td class="Genre">Love Action</td>
                     <td class="Runtime">{{ movie.runtime }}</td>
