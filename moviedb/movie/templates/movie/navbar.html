@@ -23,7 +23,7 @@
       {% if loggedin %}
       <li><a href="{% url 'moviedb:logout' %}?next={{ '/login' }}">Logout </a></li> 
       {% else %}
-       <li><a href="{% url 'moviedb:login' %}">Login </a></li> 
+       <li><a href="{% url 'moviedb:login' %}?next={{ request.get_full_path|urlencode }}">Login </a></li> 
       {%endif%}
     </ul>
   </nav>

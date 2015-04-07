@@ -12,8 +12,10 @@ urlpatterns = patterns('',
     url(r'^user/(?P<userid>[0-9]+)/$', UserView.user, name='user'),
 
     url(r'^movie/(?P<movieid>[0-9]+)/$', MovieView.movie, name='movie'),
+    url(r'^movie/watch/$', MovieView.watchmovielist, name='watchmovielist'),
     url(r'^movie/watch/add/(?P<movieid>[0-9]+)/$', MovieView.watchmovie, name='watchmovie'),
     url(r'^movie/watch/delete/(?P<movieid>[0-9]+)/$', MovieView.unwatchmovie, name='unwatchmovie'),
+    url(r'^movie/favorite/$', MovieView.favmovielist, name='favmovielist'),
     url(r'^movie/favorite/add/(?P<movieid>[0-9]+)/$', MovieView.favmovie, name='favmovie'),
     url(r'^movie/favorite/delete/(?P<movieid>[0-9]+)/$', MovieView.unfavmovie, name='unfavmovie'),
 

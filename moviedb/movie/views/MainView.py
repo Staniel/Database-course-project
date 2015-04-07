@@ -8,7 +8,8 @@ def main(request):
 	context = {'movielist': MovieList,
 			   'title': 'All movies',
 			   'username': "visitor",
-			   'loggedin': False
+			   'loggedin': False,
+			   'request': request
 	}
 	if request.user.is_authenticated():
 		context['username'] = request.user.username

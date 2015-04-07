@@ -31,7 +31,7 @@
 </div>
 
 <div id="content-main" class="col-md-4">
-<form action="{% url 'moviedb:login'%}" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
+<form action="{% url 'moviedb:login'%}?next={{next}}" method="post" id="login-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
   {% csrf_token %}
   <div class="form-row">
     

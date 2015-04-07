@@ -2,8 +2,13 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.models import User
+import urllib2
 # Create your views here.
 def userlogin(request):
+	next = ""
+	if request.GET:  
+		next = request.GET['next']
+	context = {'next' : next}
 	if request.method == 'POST':
 		username = request.POST.get('username', "noname")
 		password = request.POST.get('password', "123456")
@@ -11,11 +16,15 @@ def userlogin(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return redirect('moviedb:main')
-		context = {'msg': "wrong username or password"}
+				
+				# url_with_get = urllib2.unquote(request.GET.get('next'))
+				if next == "":
+					return redirect('moviedb:main')
+				else:
+					return redirect(next)
+		context['msg'] = "wrong username or password"
 		return render(request, 'movie/loginandreg.html', context)
-	else:
-		return render(request, 'movie/loginandreg.html')
+	return render(request, 'movie/loginandreg.html', context)
 	
 def userlogout(request):
 	logout(request)
