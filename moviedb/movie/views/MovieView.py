@@ -13,16 +13,6 @@ def movie(request, movieid):
 		raise Http404("Movie does not exist")
 	review_list = Review.objects.filter(mid=movie)
 	obj = {}
-	fav = Favorite.objects.filter(uid__exact=request.user, mid__exact=movie)
-	if len(fav) == 0:
-		obj['isliked'] = False
-	else:
-		obj['isliked'] = True
-	watched = Watch.objects.filter(uid__exact=request.user, mid__exact=movie)
-	if len(watched) == 0:
-		obj['iswatched'] = False
-	else:
-		obj['iswatched'] = True
 	rel = BelongTo.objects.filter(mid__exact = movie)
 	obj['genre'] = rel
 	produce = Produce.objects.filter(mid__exact = movie)
@@ -42,12 +32,22 @@ def movie(request, movieid):
 			   'reviews':review_list,
 			   'username': "visitor",
 			   'loggedin': False,
-			   'request': request,
-			   'info': obj
+			   'request': request
 	}
 	if request.user.is_authenticated():
+		fav = Favorite.objects.filter(uid__exact=request.user, mid__exact=movie)
+		if len(fav) == 0:
+			obj['isliked'] = False
+		else:
+			obj['isliked'] = True
+		watched = Watch.objects.filter(uid__exact=request.user, mid__exact=movie)
+		if len(watched) == 0:
+			obj['iswatched'] = False
+		else:
+			obj['iswatched'] = True
 		context['username'] = request.user.username
 		context['loggedin'] = True
+	context['info'] = obj
 	return render(request, 'movie/moviedetail.html', context)
 
 @login_required
@@ -68,6 +68,21 @@ def reviewmovie(request, movieid):
 	R = Review(content=review, date=datetime.today(), rating=rating, mid=movie, uid=request.user)
 	R.save()
 	return redirect("moviedb:movie", movieid=movieid)
+
+@login_required
+def deletereview(request, reviewid):
+	try:
+		review = Review.objects.get(id__exact=reviewid)
+	except Movie.DoesNotExist:
+		raise Http404("review does not exist")
+	print review.uid.id
+	print request.user.id
+	if review.uid != request.user:
+		return HttpResponse("illegal delete request")
+	movieid = review.mid.id
+	review.delete()
+	return redirect("moviedb:movie", movieid=movieid)
+
 
 @login_required
 def watchmovie(request, movieid):
