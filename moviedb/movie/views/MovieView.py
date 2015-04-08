@@ -1,7 +1,8 @@
 from django.shortcuts import render, Http404
 from django.http import HttpResponse
-from movie.models import Movie, Watch, Favorite
+from movie.models import Movie, Watch, Favorite, BelongTo, Produce
 from django.contrib.auth.decorators import login_required
+from movie.views.MainView import movie_context
 # Create your views here.
 def movie(request, movieid):
 	try:
@@ -24,21 +25,12 @@ def watchmovielist(request):
 	watches = Watch.objects.filter(uid__exact=request.user)
 	for watch in watches:
 		movies.append(watch.mid)
-	context = {'movielist': movies,
-			   'title': 'All movies',
-			   'username': "visitor",
-			   'loggedin': False,
-			   'request': request,
-			   'username': request.user.username,
-			   'loggedin': True
-	}
+	context = movie_context(request, movies, "watched list")
 	return render(request, 'movie/movielist.html', context)
-
 
 @login_required
 def reviewmovie(request, movieid):
 	return HttpResponse("hello world")
-
 
 @login_required
 def watchmovie(request, movieid):
@@ -54,16 +46,8 @@ def favmovielist(request):
 	favs = Favorite.objects.filter(uid__exact=request.user)
 	for fav in favs:
 		movies.append(fav.mid)
-	context = {'movielist': movies,
-			   'title': 'All movies',
-			   'username': "visitor",
-			   'loggedin': False,
-			   'request': request,
-			   'username': request.user.username,
-			   'loggedin': True
-	}
+	context = movie_context(request, movies, "favorite list")
 	return render(request, 'movie/movielist.html', context)
-
 
 @login_required
 def favmovie(request, movieid):

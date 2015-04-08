@@ -19,10 +19,10 @@
                 <tbody>
                 {% for movie in movielist %}
                 <tr class="movie_tr">
-                    <td class="moviedetail"><a href="/movie/{{movie.id}}/">{{ movie.name }}</a></td>
-                    <td class="Director">LixinYao</td>
-                    <td class="Genre">Love Action</td>
-                    <td class="Runtime">{{ movie.runtime }}</td>
+                    <td class="moviedetail"><a href="/movie/{{movie.id}}/">{{ movie.movie.name }}</a></td>
+                    <td class="Director">{{movie.crew}}</td>
+                    <td class="Genre">{{movie.genre}}</td>
+                    <td class="Runtime">{{ movie.movie.runtime }}</td>
                     <td class="Rating">10</td>
                 </tr>
                 {% endfor %}
