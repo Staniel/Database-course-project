@@ -19,11 +19,11 @@
                 <tbody>
                 {% for movie in movielist %}
                 <tr class="movie_tr">
-                    <td class="moviedetail"><a href="/movie/{{movie.id}}/">{{ movie.movie.name }}</a></td>
+                    <td class="moviedetail"><a href="/movie/{{movie.movie.id}}/">{{ movie.movie.name }}</a></td>
                     <td class="Director">{{movie.crew}}</td>
                     <td class="Genre">{{movie.genre}}</td>
                     <td class="Runtime">{{ movie.movie.runtime }}</td>
-                    <td class="Rating">10</td>
+                    <td class="Rating">{{movie.rating}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

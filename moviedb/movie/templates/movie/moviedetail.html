@@ -5,12 +5,36 @@
          <span >(2014)</span>
     </h1>
 <div id="info">
-        <span ><span>Director</span>: <span>Lixin Yao</span></span><br/>
-        <span ><span>Actor</span>: 
-        <span >AAA / BBB</span></span><br/>
-        <span >Genre:</span> <span>Comic</span> / <span >Action</span> <br/>
-        <span >Release Info:</span> <span>2015-03-27(China Mainland)</span> / <span>2015-01-29(England)</span><br/>
-        <span >Runtime:</span> <span>{{movie.runtime}} mins</span> <br/>      
+        <span ><span>Director</span>: 
+            <span>{{info.director}}</span></span><br/>
+        <span >
+            <span>Actor</span>: 
+        {%if info.actors.0%}
+        {% for actor in info.actors %}
+        <span>{{actor}}&nbsp;</span>
+        {%endfor%}
+        {%else%}
+        No actors informations, sorry
+        {%endif%}
+
+        </span><br/>
+
+        <span >Genre:</span> 
+        {%if info.genre.0%}
+        {% for g in info.genre %}
+        <span>{{g.gid.name}}&nbsp;&nbsp;</span>
+        {%endfor%}
+        {%else%}
+        No genre informations, sorry
+        {%endif%}
+    </br>
+        <span ><span>Rating</span>: 
+            <span>{{info.rating}}</span></span><br/>
+        <span >Release Info:</span> 
+            <span>2015-03-27(China Mainland)</span> / 
+            <span>2015-01-29(England)</span><br/>
+        <span >Runtime:</span> 
+            <span>{{movie.runtime}} mins</span> <br/>      
         <div >
             <h2>Storyline of {{movie.name}}&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·</h2>
             <div >
@@ -23,30 +47,40 @@
         </div>
     </div>
 	  {% if loggedin %}
-<form action="{% url 'moviedb:reviewmovie' movie.id%} " id="reviewform">
+
+<div id="content-review">
+<form action="{% url 'moviedb:reviewmovie' movie.id%} " method="post" id="review-form">
+  {% csrf_token %}
   </br>
+  <div class="form-row">
   <h2>give your rating and review for this movie!</h2>
-  Rating:   
-  <select name="rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
+   
+    <label class="required" for="rating">Rating:</label> 
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
   </select>
+  </div>
+  <div class="form-row" id="textareareview">
+    <label for="review">Review:</label> 
+    <textarea rows="4" cols="50" id="review" name="review" placeholder="Enter your review here...">
+    </textarea>
 </br>
-</br>
-  <textarea rows="4" cols="50" name="review" placeholder="Enter your review here...">
-</textarea>
-</br>
-  <input type="submit" value="Submit">
+  </div>
+  <div class="submit-row">
+    <label>&nbsp;</label><input type="submit" value="review" />
+  </div>
 </form>
-<br>
+</div>
+ <br>
       {% else %}
       <h2>Login to rate and write review to the movie</h2>
       {%endif%}
@@ -54,28 +88,25 @@
         	<i >Short review for {{movie.name}}</i>
               · · · · · ·
     	</h2>
-    <div id="commentlist">    
+    <div id="commentlist"> 
+    {% if reviews.0 %}  
+        {% for review in reviews %}
         <div>
             <h4>
                 <span>
-                    <span >Di Li</span>
-                    <span >2015-01-23</span>
-                    <span>Rating: 9</span>
+                    <span >{{review.uid.username}}</span>
+                    <span >{{review.date}}</span>
+                    <span>Rating: {{review.rating}}</span>
                 </span>
             </h4>
-            <p> Best movie ever!</p>
+            <p> {{review.content}}</p>
         </div>
-        <div>
-            <h4>
-                <span>
-                    <span >Obama</span>
-                    <span >2015-01-24</span>
-                    <span>Rating: 10</span>
-                </span>
-            </h4>
-            <p> I like it!</p>
-        </div>
+        {% endfor %} 
     </div>
+    {% else %}
+        <p>No review yet</p>
+    {% endif %}
+
 {% endblock %}
 {% block flyer %}
 {% endblock %}

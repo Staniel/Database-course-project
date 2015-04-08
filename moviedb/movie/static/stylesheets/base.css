@@ -9,3 +9,5 @@ html, body {
 #flyer{
 	  margin-bottom: 0px;
 }
+label {display:block;}
+textarea { display:block;}

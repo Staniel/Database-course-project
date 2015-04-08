@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from movie.models import Movie, BelongTo, Produce
+from movie.models import Movie, BelongTo, Produce, Review
+from django.db.models import Avg
 # @login_required
 def movie_context(request, movies, title):
 	MovieList = []
@@ -12,6 +13,10 @@ def movie_context(request, movies, title):
 		produce = Produce.objects.filter(mid__exact = movie)
 		#here need to distinguish crew type
 		obj['crew'] = produce[0].cid.name
+		rev = Review.objects.filter(mid__exact = movie).aggregate(Avg('rating'))
+		obj['rating'] = rev['rating__avg']
+		if obj['rating'] == None:
+			obj['rating'] = 0
 		MovieList.append(obj)
 	context = {'movielist': MovieList,
 			   'title': title,
