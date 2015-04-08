@@ -5,10 +5,10 @@
          <span >(2014)</span>
     </h1>
 <div id="info">
-        <span ><span>Director</span>: 
+        <span ><strong>Director</strong>: 
             <span>{{info.director}}</span></span><br/>
         <span >
-            <span>Actor</span>: 
+            <strong>Actor</strong>: 
         {%if info.actors.0%}
         {% for actor in info.actors %}
         <span>{{actor}}&nbsp;</span>
@@ -19,7 +19,7 @@
 
         </span><br/>
 
-        <span >Genre:</span> 
+        <strong >Genre:</strong> 
         {%if info.genre.0%}
         {% for g in info.genre %}
         <span>{{g.gid.name}}&nbsp;&nbsp;</span>
@@ -28,12 +28,18 @@
         No genre informations, sorry
         {%endif%}
     </br>
-        <span ><span>Rating</span>: 
+        <span ><strong>Rating</strong>: 
             <span>{{info.rating}}</span></span><br/>
-        <span >Release Info:</span> 
-            <span>2015-03-27(China Mainland)</span> / 
-            <span>2015-01-29(England)</span><br/>
-        <span >Runtime:</span> 
+        <strong >Release Info:</strong><br/> 
+        {%if info.release.0%}
+        {% for r in info.release %}
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;{{r.date}}  ({{r.area}})</span><br/>
+        {%endfor%}
+        {%else%}
+        No release informations, sorry<br/>
+        {%endif%}
+            
+        <strong >Runtime:</strong> 
             <span>{{movie.runtime}} mins</span> <br/>      
         <div >
             <h2>Storyline of {{movie.name}}&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·&nbsp;&nbsp;·</h2>

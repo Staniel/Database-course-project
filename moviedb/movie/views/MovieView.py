@@ -1,6 +1,6 @@
 from django.shortcuts import render, Http404, redirect
 from django.http import HttpResponse
-from movie.models import Movie, Watch, Favorite, BelongTo, Produce, Review
+from movie.models import Movie, Watch, Favorite, BelongTo, Produce, Review, ReleaseInfo
 from django.contrib.auth.decorators import login_required
 from movie.views.MainView import movie_context
 from datetime import datetime
@@ -27,6 +27,8 @@ def movie(request, movieid):
 	obj['rating'] = rev['rating__avg']
 	if obj['rating'] == None:
 		obj['rating'] = 0
+	release = ReleaseInfo.objects.filter(mid__exact=movie)
+	obj['release'] = release
 	context = {'movie': movie,
 			   'reviews':review_list,
 			   'username': "visitor",
