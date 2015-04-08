@@ -13,10 +13,19 @@ def movie(request, movieid):
 		raise Http404("Movie does not exist")
 	review_list = Review.objects.filter(mid=movie)
 	obj = {}
+	fav = Favorite.objects.filter(uid__exact=request.user, mid__exact=movie)
+	if len(fav) == 0:
+		obj['isliked'] = False
+	else:
+		obj['isliked'] = True
+	watched = Watch.objects.filter(uid__exact=request.user, mid__exact=movie)
+	if len(watched) == 0:
+		obj['iswatched'] = False
+	else:
+		obj['iswatched'] = True
 	rel = BelongTo.objects.filter(mid__exact = movie)
 	obj['genre'] = rel
 	produce = Produce.objects.filter(mid__exact = movie)
-	print produce
 	obj['actors'] = []
 	for person in produce:
 		if person.cid.crew_type == 0:
@@ -52,7 +61,6 @@ def watchmovielist(request):
 
 @login_required
 def reviewmovie(request, movieid):
-	print request.POST
 	rating = request.POST.get('rating', -1)
 	#add error handling here
 	review = request.POST.get('review', "")
@@ -63,11 +71,22 @@ def reviewmovie(request, movieid):
 
 @login_required
 def watchmovie(request, movieid):
-	return HttpResponse("hello world")
+	try:
+		movie = Movie.objects.get(id__exact=movieid)
+	except Movie.DoesNotExist:
+		raise Http404("Movie does not exist")
+	watch = Watch(mid=movie, uid=request.user)
+	watch.save()
+	return redirect("moviedb:movie", movieid=movieid)
 
 @login_required
 def unwatchmovie(request, movieid):
-	return HttpResponse("hello world")
+	try:
+		movie = Movie.objects.get(id__exact=movieid)
+	except Movie.DoesNotExist:
+		raise Http404("Movie does not exist")
+	Watch.objects.filter(mid__exact=movie, uid__exact=request.user).delete()
+	return redirect("moviedb:movie", movieid=movieid)
 
 @login_required
 def favmovielist(request):
@@ -80,8 +99,19 @@ def favmovielist(request):
 
 @login_required
 def favmovie(request, movieid):
-	return HttpResponse("hello world")
+	try:
+		movie = Movie.objects.get(id__exact=movieid)
+	except Movie.DoesNotExist:
+		raise Http404("Movie does not exist")
+	fav = Favorite(mid=movie, uid=request.user)
+	fav.save()
+	return redirect("moviedb:movie", movieid=movieid)
 
 @login_required
 def unfavmovie(request, movieid):
-	return HttpResponse("hello world")
+	try:
+		movie = Movie.objects.get(id__exact=movieid)
+	except Movie.DoesNotExist:
+		raise Http404("Movie does not exist")
+	Favorite.objects.filter(mid__exact=movie, uid__exact=request.user).delete()
+	return redirect("moviedb:movie", movieid=movieid)
