@@ -35,10 +35,10 @@ def register(request):
 		password = request.POST.get('password', "123456")
 		prevuser=User.objects.filter(username=username)
 		if len(prevuser) > 0:
-			context = {'registermsg': "username have been used before"}
+			context = {'registermsg': "username have been used before", 'success': False}
 			return render(request, 'movie/loginandreg.html', context)			
 		user = User.objects.create_user(username=username, password=password)
-		context = {'registermsg': "success, please login"}
+		context = {'registermsg': "success, please login", 'success': True}
 		return render(request, 'movie/loginandreg.html', context)	
 	else:
 		return render(request, 'movie/loginandreg.html')

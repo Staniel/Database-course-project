@@ -10,7 +10,7 @@
   </div>
 
 <div id="content-main" class="col-md-8">
-<form action="{% url 'moviedb:register'%}" method="post" id="register-form"><input type='hidden' name='csrfmiddlewaretoken' value='hfMlMRlhNOXnJBmqnjnagEHVf4Yg4kAr' />
+<form action="{% url 'moviedb:register'%}" method="post" id="register-form">
   {% csrf_token %}
   <div class="form-row">
     
@@ -22,7 +22,11 @@
     <input type="hidden" name="next" value="/admin/" />
   </div>
   {% if registermsg %}
-    <p>{{registermsg}}</p>
+    {%if success%}
+    <p style="color:green">{{registermsg}}</p>
+    {%else%}
+    <p style="color:red">{{registermsg}}</p>
+    {%endif%}
   {%endif%}
   <div class="submit-row">
     <label>&nbsp;</label><input type="submit" value="Register" />
@@ -40,10 +44,9 @@
   <div class="form-row">
     
     <label class="required" for="id_password">Password:</label> <input id="id_password" name="password" type="password" />
-    <input type="hidden" name="next" value="/admin/" />
   </div>
   {% if msg %}
-    <p>{{msg}}</p>
+    <p style="color:red">{{msg}}</p>
   {%endif%}
   <div class="submit-row">
     <label>&nbsp;</label><input type="submit" value="Login" />
