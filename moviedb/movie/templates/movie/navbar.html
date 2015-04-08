@@ -13,8 +13,8 @@
     <ul id="plantab" class="nav navbar-nav">
       <li id="allmovie"><a href="{% url 'moviedb:main' %}">All Movies</a></li>
       {% if loggedin %}
-      <li><a href="#">My favorite movie</a></li> 
-      <li><a href="#">My watched movie</a></li> 
+      <li><a href="{% url 'moviedb:watchmovielist' %}">My watched movie</a></li> 
+      <li><a href="{% url 'moviedb:favmovielist' %}">My favorite movie</a></li> 
       {%endif%}
       <li><a href="#">Discuss board</a></li> 
     </ul>

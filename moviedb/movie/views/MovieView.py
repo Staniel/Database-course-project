@@ -1,6 +1,6 @@
 from django.shortcuts import render, Http404
 from django.http import HttpResponse
-from movie.models import Movie
+from movie.models import Movie, Watch, Favorite
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def movie(request, movieid):
@@ -20,7 +20,19 @@ def movie(request, movieid):
 
 @login_required
 def watchmovielist(request):
-	return HttpResponse("hello world")
+	movies = []
+	watches = Watch.objects.filter(uid__exact=request.user)
+	for watch in watches:
+		movies.append(watch.mid)
+	context = {'movielist': movies,
+			   'title': 'All movies',
+			   'username': "visitor",
+			   'loggedin': False,
+			   'request': request,
+			   'username': request.user.username,
+			   'loggedin': True
+	}
+	return render(request, 'movie/movielist.html', context)
 
 
 @login_required
@@ -38,7 +50,20 @@ def unwatchmovie(request, movieid):
 
 @login_required
 def favmovielist(request):
-	return HttpResponse("hello world")
+	movies = []
+	favs = Favorite.objects.filter(uid__exact=request.user)
+	for fav in favs:
+		movies.append(fav.mid)
+	context = {'movielist': movies,
+			   'title': 'All movies',
+			   'username': "visitor",
+			   'loggedin': False,
+			   'request': request,
+			   'username': request.user.username,
+			   'loggedin': True
+	}
+	return render(request, 'movie/movielist.html', context)
+
 
 @login_required
 def favmovie(request, movieid):
