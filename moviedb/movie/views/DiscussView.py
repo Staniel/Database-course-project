@@ -13,7 +13,7 @@ def listpost(request):
 	else:
 		context = {'username': 'visitor', 'loggedin': False}
 
-	numPerPage = 2
+	numPerPage = 10
 	post_list = Topic.objects.select_related('user').values('id', 'user__username', 'title', 'date').order_by('-date')
 	p = Paginator(post_list, numPerPage)
 	page = request.GET.get('page')
@@ -39,7 +39,7 @@ def viewpost(request, postid):
 	context['post'] = post[0]
 
 	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date').order_by('-date')
-	numPerPage = 5
+	numPerPage = 10
 	p = Paginator(comment_list, numPerPage)
 	page = request.GET.get('page')
 	try:
