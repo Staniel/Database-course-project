@@ -21,7 +21,7 @@
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Welcome, {{username}}</a></li>
       {% if loggedin %}
-      <li><a href="{% url 'moviedb:logout' %}?next={{ '/login' }}">Logout </a></li> 
+      <li><a href="{% url 'moviedb:logout' %}">Logout </a></li> 
       {% else %}
        <li><a href="{% url 'moviedb:login' %}?next={{ request.get_full_path|urlencode }}">Login </a></li> 
       {%endif%}

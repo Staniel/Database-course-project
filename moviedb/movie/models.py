@@ -62,7 +62,7 @@ class Favorite(models.Model):
 class Post(models.Model):
 	user = models.ForeignKey(User)
 	content = models.TextField(max_length = 5000, blank = True)
-	date = models.DateField()
+	date = models.DateTimeField()
 
 class Topic(Post):
 	title = models.CharField(max_length = 100)

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def userlogin(request):
-	print request.POST
 	next = ""
 	if request.GET:  
 		next = request.GET['next']
@@ -27,7 +26,7 @@ def userlogin(request):
 	
 def userlogout(request):
 	logout(request)
-	return redirect('moviedb:login')
+	return redirect('moviedb:main')
 
 def register(request):
 	if request.method == 'POST':

@@ -8,10 +8,13 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 def listpost(request):
 	username = request.user.username
-	context = {'username': username}
+	if username:
+		context = {'username': username, 'loggedin': True}
+	else:
+		context = {'username': 'visitor', 'loggedin': False}
 
 	numPerPage = 2
-	post_list = Topic.objects.select_related('user').values('id', 'user__username', 'title', 'date')
+	post_list = Topic.objects.select_related('user').values('id', 'user__username', 'title', 'date').order_by('-date')
 	p = Paginator(post_list, numPerPage)
 	page = request.GET.get('page')
 	try:
@@ -26,12 +29,15 @@ def listpost(request):
 
 def viewpost(request, postid):
 	username = request.user.username
-	context = {'username': username}
+	if username:
+		context = {'username': username, 'loggedin': True}
+	else:
+		context = {'username': 'visitor', 'loggedin': False}
 
 	post = Topic.objects.filter(id = postid).values('id', 'title', 'content')
 	context['post'] = post[0]
 
-	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date')
+	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date').order_by('-date')
 	numPerPage = 5
 	p = Paginator(comment_list, numPerPage)
 	page = request.GET.get('page')
