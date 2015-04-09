@@ -25,6 +25,7 @@ def listpost(request):
 		posts = p.page(p.num_pages)
 	context['posts'] = posts
 
+	context['request'] = request
 	return render(request, 'movie/postlist.html', context)
 
 def viewpost(request, postid):
@@ -49,6 +50,7 @@ def viewpost(request, postid):
 		comments = p.page(p.num_pages)
 	context['comments'] = comments
 
+	context['request'] = request
 	return render(request, 'movie/post.html', context)
 
 @login_required
