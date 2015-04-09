@@ -58,7 +58,7 @@
     {% endif %}
 
     {% for i in comments.paginator.page_range%}
-    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    <li {% ifequal comments.number i%} class="active" {% endifequal %}><a href="?page={{ i }}">{{ i }}</a></li>
     {% endfor %}
 
     {# Next button #}
