@@ -41,6 +41,8 @@ class ReleaseInfo(models.Model):
 
 	class Meta:
 		unique_together = ('id', 'mid')
+	def __str__(self):
+		return self.mid.name+" "+str(self.date)+" "+self.area
 
 class Review(models.Model):
 	uid = models.ForeignKey(User)
