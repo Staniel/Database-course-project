@@ -78,7 +78,7 @@ def deletereview(request, reviewid):
 	print review.uid.id
 	print request.user.id
 	if review.uid != request.user:
-		return HttpResponse("illegal delete request")
+		return render(request, 'movie/error.html', {'msg': 'illegal delete request'})
 	movieid = review.mid.id
 	review.delete()
 	return redirect("moviedb:movie", movieid=movieid)
