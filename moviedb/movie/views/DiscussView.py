@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, Http404
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from movie.models import Topic, Comment
@@ -35,8 +35,12 @@ def viewpost(request, postid):
 	else:
 		context = {'username': 'visitor', 'loggedin': False}
 
-	post = Topic.objects.filter(id = postid).select_related('user').values('id', 'user__username', 'title', 'content')
-	context['post'] = post[0]
+	try:
+		Topic.objects.get(id = postid)
+		post = Topic.objects.filter(id = postid).select_related('user').values('id', 'user__username', 'title', 'content')
+		context['post'] = post[0]
+	except Topic.DoesNotExist:
+		raise Http404("Post does not exist")
 
 	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date').order_by('-date')
 	numPerPage = 10
