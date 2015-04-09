@@ -40,7 +40,7 @@ def viewpost(request, postid):
 		post = Topic.objects.filter(id = postid).select_related('user').values('id', 'user__username', 'title', 'content')
 		context['post'] = post[0]
 	except Topic.DoesNotExist:
-		raise Http404("Post does not exist")
+		return render(request, 'movie/error.html', {'msg': 'post not found'})
 
 	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date').order_by('-date')
 	numPerPage = 10
