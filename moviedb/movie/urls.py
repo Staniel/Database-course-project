@@ -8,8 +8,6 @@ urlpatterns = patterns('',
     url(r'^login/$', UserView.userlogin, name='login'),
     url(r'^logout/$', UserView.userlogout, name='logout'),
     url(r'^register/$', UserView.register, name='register'),
-    # url(r'^updateinfo/$', UserView.updateinfo, name='updateinfo'),
-    # url(r'^user/(?P<userid>[0-9]+)/$', UserView.user, name='user'),
 
     url(r'^movie/(?P<movieid>[0-9]+)/$', MovieView.movie, name='movie'),
     url(r'^movie/review/(?P<movieid>[0-9]+)/$', MovieView.reviewmovie, name='reviewmovie'),
@@ -28,5 +26,6 @@ urlpatterns = patterns('',
     url(r'^discuss/post/modify/(?P<postid>[0-9]+)/$', DiscussView.modifypost, name='modifypost'),
     url(r'^discuss/comment/delete/(?P<commentid>[0-9]+)/$', DiscussView.deletecomment, name='deletecomment'),
     url(r'^discuss/comment/add/$', DiscussView.addcomment, name='addcomment'),
+    url(r'^.*/$', MainView.error_handler, name='error'),
 
 )

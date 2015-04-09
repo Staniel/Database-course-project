@@ -36,4 +36,5 @@ def main(request):
 		context['username'] = "visitors"
 		context['loggedin'] = False
 	return render(request, 'movie/movielist.html', context)
-
+def error_handler(request):
+	return render(request, 'movie/error.html', {'msg': 'URL not found'})

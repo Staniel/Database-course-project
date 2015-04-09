@@ -10,7 +10,7 @@ def movie(request, movieid):
 	try:
 		movie = Movie.objects.get(id__exact=movieid)
 	except Movie.DoesNotExist:
-		raise Http404("Movie does not exist")
+		return render(request, 'movie/error.html', {'msg': 'movie not found'})
 	review_list = Review.objects.filter(mid=movie)
 	obj = {}
 	rel = BelongTo.objects.filter(mid__exact = movie)
@@ -74,7 +74,7 @@ def deletereview(request, reviewid):
 	try:
 		review = Review.objects.get(id__exact=reviewid)
 	except Movie.DoesNotExist:
-		raise Http404("review does not exist")
+		return render(request, 'movie/error.html', {'msg': 'review not found'})
 	print review.uid.id
 	print request.user.id
 	if review.uid != request.user:
@@ -89,7 +89,7 @@ def watchmovie(request, movieid):
 	try:
 		movie = Movie.objects.get(id__exact=movieid)
 	except Movie.DoesNotExist:
-		raise Http404("Movie does not exist")
+		return render(request, 'movie/error.html', {'msg': 'movie not found'})
 	watch = Watch(mid=movie, uid=request.user)
 	watch.save()
 	return redirect("moviedb:movie", movieid=movieid)
@@ -99,7 +99,7 @@ def unwatchmovie(request, movieid):
 	try:
 		movie = Movie.objects.get(id__exact=movieid)
 	except Movie.DoesNotExist:
-		raise Http404("Movie does not exist")
+		return render(request, 'movie/error.html', {'msg': 'movie not found'})
 	Watch.objects.filter(mid__exact=movie, uid__exact=request.user).delete()
 	return redirect("moviedb:movie", movieid=movieid)
 
@@ -117,7 +117,7 @@ def favmovie(request, movieid):
 	try:
 		movie = Movie.objects.get(id__exact=movieid)
 	except Movie.DoesNotExist:
-		raise Http404("Movie does not exist")
+		return render(request, 'movie/error.html', {'msg': 'movie not found'})
 	fav = Favorite(mid=movie, uid=request.user)
 	fav.save()
 	return redirect("moviedb:movie", movieid=movieid)
@@ -127,6 +127,6 @@ def unfavmovie(request, movieid):
 	try:
 		movie = Movie.objects.get(id__exact=movieid)
 	except Movie.DoesNotExist:
-		raise Http404("Movie does not exist")
+		return render(request, 'movie/error.html', {'msg': 'movie not found'})
 	Favorite.objects.filter(mid__exact=movie, uid__exact=request.user).delete()
 	return redirect("moviedb:movie", movieid=movieid)
