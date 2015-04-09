@@ -47,7 +47,7 @@ class ReleaseInfo(models.Model):
 class Review(models.Model):
 	uid = models.ForeignKey(User)
 	mid = models.ForeignKey(Movie)
-	date = models.DateField()
+	date = models.DateTimeField()
 	content = models.TextField(max_length = 5000, blank = True)
 	rating = models.IntegerField()
 
