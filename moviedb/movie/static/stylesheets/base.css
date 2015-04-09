@@ -5,3 +5,9 @@ html, body {
 #content {
 	min-height: 60%;
 }
+
+#flyer{
+	  margin-bottom: 0px;
+}
+label {display:block;}
+textarea { display:block;}
