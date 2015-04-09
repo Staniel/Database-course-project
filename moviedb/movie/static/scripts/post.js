@@ -53,6 +53,45 @@ $(document).ready(function() {
 	});
 
 	// post
+	$('#modify-post').click(function() {
+		$('#modify-post-modal').modal('show');
+	});
+
+	$('#modify-post-submit').click(function() {
+		$('#modify-post-submit').attr('disabled', 'disabled');
+		var title = $('#modify-post-title').val();
+		var content = $('#modify-post-content').val();
+		var id = $('#post-detail div:last').text();
+		$.ajax({
+			type: "POST",
+			url: "/discuss/post/modify/" + id + "/",
+			data: {
+				title: title,
+				content: content,
+			},
+			beforeSend: function(xhr, settings) {
+				var csrftoken = $.cookie('csrftoken');
+				if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+					xhr.setRequestHeader("X-CSRFToken", csrftoken);
+				}
+			},
+			success: function() {
+				$('#modify-post-modal .modal-footer div').show();
+				$('#modify-post-content').val('');
+				setTimeout(function() {
+					$('#modify-post-modal .modal-footer div').hide();
+					$('#modify-post-modal').modal('hide');
+					window.location.replace("");
+				}, 1000);
+			},
+			error: function(data) {
+				alert('Comment Failed!');
+				$('#modify-post-submit').removeAttr('disabled');
+			}
+		});
+		
+	});
+
 	$('#new-comment').click(function() {
 		$('#new-comment-modal').modal('show');
 	});

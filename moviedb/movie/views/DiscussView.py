@@ -35,7 +35,7 @@ def viewpost(request, postid):
 	else:
 		context = {'username': 'visitor', 'loggedin': False}
 
-	post = Topic.objects.filter(id = postid).values('id', 'title', 'content')
+	post = Topic.objects.filter(id = postid).select_related('user').values('id', 'user__username', 'title', 'content')
 	context['post'] = post[0]
 
 	comment_list = Comment.objects.filter(post_belong_id = postid).select_related('user').values('id', 'content', 'user__username', 'date').order_by('-date')
@@ -66,6 +66,15 @@ def addpost(request):
 	date = timezone.now()
 	topic = Topic(user = user, title = title, content = content, date = date)
 	topic.save()
+	return HttpResponse("success")
+
+@login_required
+def modifypost(request, postid):
+	user = request.user
+	title = request.POST.get('title')
+	content = request.POST.get('content')
+	date = timezone.now()
+	Topic.objects.filter(id = postid).update(title = title, content = content, date = date)
 	return HttpResponse("success")
 
 @login_required

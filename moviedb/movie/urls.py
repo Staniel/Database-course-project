@@ -25,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^discuss/post/view/(?P<postid>[0-9]+)/$', DiscussView.viewpost, name='viewpost'),
     url(r'^discuss/post/delete/(?P<postid>[0-9]+)/$', DiscussView.deletepost, name='deletepost'),
     url(r'^discuss/post/add/$', DiscussView.addpost, name='addpost'),
+    url(r'^discuss/post/modify/(?P<postid>[0-9]+)/$', DiscussView.modifypost, name='modifypost'),
     url(r'^discuss/comment/delete/(?P<commentid>[0-9]+)/$', DiscussView.deletecomment, name='deletecomment'),
     url(r'^discuss/comment/add/$', DiscussView.addcomment, name='addcomment'),
 

@@ -27,7 +27,7 @@
 	font-size: 1.5em;
 }
 
-#new-comment-modal .modal-footer div {
+#new-comment-modal .modal-footer div, #modify-post-modal .modal-footer div {
 	padding: 5px;
 	float: left;
 	display: none;
@@ -36,4 +36,8 @@
 
 #commentlist .list-group-item div.row div:first-child {
 	border-right: 2px solid gray;
+}
+
+#post-detail .modify-button {
+	float: right;
 }

@@ -2,7 +2,12 @@
 {% block content %}
 
 <div class="panel panel-default" id="post-detail">
-  <div class="panel-heading">{{ post.title }}</div>
+  <div class="panel-heading">
+    <span>{{ post.title }}</span>
+    {% ifequal username post.user__username %}
+      <a href="javascript:void(0);" class="modify-button" id="modify-post">Modify</a>
+    {% endifequal %}
+  </div>
   <div class="panel-body">
     {{ post.content }}
   </div>
@@ -87,6 +92,26 @@
         <div class="alert alert-success" role="alert">Commented Successfully!</div>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="new-comment-submit">Comment!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="modify-post-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modify Post</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="modify-post-title" placeholder="Title..." value="{{ post.title }}"><br>
+        <textarea rows="10" class="form-control" id="modify-post-content">{{ post.content }}</textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="alert alert-success" role="alert">Modified Successfully!</div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="modify-post-submit">Modify!</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
