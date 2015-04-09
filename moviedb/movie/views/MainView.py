@@ -9,10 +9,12 @@ def movie_context(request, movies, title):
 	for movie in movies:
 		obj = {'movie': movie}
 		rel = BelongTo.objects.filter(mid__exact = movie)
-		obj['genre'] = rel[0].gid.name
+		if len(rel) > 0:
+			obj['genre'] = rel[0].gid.name
 		produce = Produce.objects.filter(mid__exact = movie)
 		#here need to distinguish crew type
-		obj['crew'] = produce[0].cid.name
+		if len(produce) > 0:
+			obj['crew'] = produce[0].cid.name
 		rev = Review.objects.filter(mid__exact = movie).aggregate(Avg('rating'))
 		obj['rating'] = rev['rating__avg']
 		if obj['rating'] == None:

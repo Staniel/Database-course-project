@@ -7,22 +7,32 @@ class Movie(models.Model):
 	name = models.CharField(max_length=50)
 	runtime = models.IntegerField(null=True, blank=True)
 	storyline = models.TextField(null=True, blank=True)
+	def __str__(self):
+		return self.name
 
 class Crew(models.Model):
 	name = models.CharField(max_length=50)
-	description = models.TextField(max_length=100)
+	description = models.TextField(max_length=100, blank=True)
 	crew_type = models.IntegerField()
+	def __str__(self):
+		return self.name
 
 class Produce(models.Model):
 	mid = models.ForeignKey(Movie)
 	cid = models.ForeignKey(Crew)
+	def __str__(self):
+		return self.cid.name+" produce "+self.mid.name
 
 class Genre(models.Model):
 	name = models.CharField(max_length=50)
+	def __str__(self):
+		return self.name
 
 class BelongTo(models.Model):
 	mid = models.ForeignKey(Movie)
 	gid = models.ForeignKey(Genre)
+	def __str__(self):
+		return self.mid.name+" belong to "+self.gid.name
 
 class ReleaseInfo(models.Model):
 	mid = models.ForeignKey(Movie)

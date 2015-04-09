@@ -11,7 +11,7 @@
                 <tr>
                     <td>name</td>
                     <td>Director</td>
-                    <td>Genre</td>
+                    <!-- <td>Genre</td> -->
                     <td>Runtime</td>
                     <td>Rating</td>
                 </tr>
@@ -20,8 +20,20 @@
                 {% for movie in movielist %}
                 <tr class="movie_tr">
                     <td class="moviedetail"><a href="/movie/{{movie.movie.id}}/">{{ movie.movie.name }}</a></td>
-                    <td class="Director">{{movie.crew}}</td>
-                    <td class="Genre">{{movie.genre}}</td>
+                    <td class="Director">
+                        {% if movie.crew %}
+                        {{movie.crew}}
+                       {%else%}
+                        unknown
+                        {%endif%}
+                    </td>
+<!--                     <td class="Genre">
+                        {% if movie.genre %}
+                        {{movie.genre}}
+                        {%else%}
+                        unknown
+                        {%endif%}
+                    </td> -->
                     <td class="Runtime">{{ movie.movie.runtime }}</td>
                     <td class="Rating">{{movie.rating}}</td>
                 </tr>
