@@ -1,0 +1,89 @@
+{% extends 'movie/base.html' %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-3 col-md-offset-9">
+    {% if username %}
+    <button type="button" class="btn btn-default" id="new-post">New Post</button>
+    {% else %}
+    <button type="button" class="btn btn-default" id="new-post" disabled="disabled">New Post</button>
+    {% endif %}
+  </div>
+</div>
+<br>
+
+<div class="list-group" id="postlist">
+  {% for post in posts %}
+  <li class="list-group-item">
+    {% ifequal username post.user__username %}
+    <a href="{% url 'moviedb:deletepost' post.id %}" class="remove-button">&times;</a>
+    {% endifequal %}
+    <h4 class="list-group-item-heading">
+      <a href="{% url 'moviedb:viewpost' post.id %}">
+        {{ post.title }}
+      </a>
+    </h4>
+    <p class="list-group-item-text">{{ post.date}} by {{ post.user__username }}</p>
+  </li>
+  {% endfor %}
+</div>
+
+<nav>
+  <ul class="pagination">
+    {# Previous button #}
+    {% if posts.has_previous %}
+    <li>
+      <a href="?page={{ posts.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="disabled">
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for i in posts.paginator.page_range%}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %}
+
+    {# Next button #}
+    {% if posts.has_next %}
+    <li>
+      <a href="?page={{ posts.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="disabled">
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+
+<div class="modal fade" id="new-post-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New Post</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" class="form-control" id="new-post-title" placeholder="Title..."><br>
+        <textarea rows="10" class="form-control" id="new-post-content"></textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="alert alert-success" role="alert">Posted Successfully!</div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="new-post-submit">Post!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}

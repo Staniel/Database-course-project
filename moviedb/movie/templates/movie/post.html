@@ -1,0 +1,95 @@
+{% extends 'movie/base.html' %}
+{% block content %}
+
+<div class="panel panel-default" id="post-detail">
+  <div class="panel-heading">{{ post.title }}</div>
+  <div class="panel-body">
+    {{ post.content }}
+  </div>
+  <div style="display:none;">{{ post.id }}</div>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-md-3 col-md-offset-9">
+    {% if username %}
+    <button type="button" class="btn btn-default" id="new-comment">New Comment</button>
+    {% else %}
+    <button type="button" class="btn btn-default" id="new-comment" disabled="disabled">New Comment</button>
+    {% endif %}
+  </div>
+</div>
+<br>
+
+<div class="list-group" id="commentlist">
+  {% for comment in comments %}
+  <li class="list-group-item">
+    {% ifequal username comment.user__username %}
+    <a href="{% url 'moviedb:deletecomment' comment.id %}" class="remove-button">&times;</a>
+    {% endifequal %}
+    <div class="row">
+      <div class="col-md-3">{{ comment.user__username }}<br>{{ comment.date }}</div>
+      <div class="col-md-9"><p class="list-group-item-text">{{ comment.content }}</p></div>
+    </div>
+  </li>
+  {% endfor %}
+</div>
+
+<nav>
+  <ul class="pagination">
+    {# Previous button #}
+    {% if comments.has_previous %}
+    <li>
+      <a href="?page={{ comments.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="disabled">
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% for i in comments.paginator.page_range%}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %}
+
+    {# Next button #}
+    {% if comments.has_next %}
+    <li>
+      <a href="?page={{ comments.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% else %}
+    <li class="disabled">
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+
+<div class="modal fade" id="new-comment-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">New Comment</h4>
+      </div>
+      <div class="modal-body">
+        <textarea rows="10" class="form-control" id="new-comment-content"></textarea>
+      </div>
+      <div class="modal-footer">
+        <div class="alert alert-success" role="alert">Commented Successfully!</div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="new-comment-submit">Comment!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}

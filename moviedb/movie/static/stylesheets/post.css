@@ -1,0 +1,39 @@
+#new-post {
+	float: right;
+}
+
+#postlist .remove-button {
+	position: absolute;
+	right: 1em;
+	display: none;
+}
+
+#new-post-modal .modal-footer div {
+	padding: 5px;
+	float: left;
+	display: none;
+	font-size: 1em;
+}
+
+
+#new-comment {
+	float: right;
+}
+
+#commentlist .remove-button {
+	position: absolute;
+	right: 1em;
+	display: none;
+	font-size: 1.5em;
+}
+
+#new-comment-modal .modal-footer div {
+	padding: 5px;
+	float: left;
+	display: none;
+	font-size: 1em;
+}
+
+#commentlist .list-group-item div.row div:first-child {
+	border-right: 2px solid gray;
+}

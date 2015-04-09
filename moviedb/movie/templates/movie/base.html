@@ -14,6 +14,7 @@
      <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/base.css">
   <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/login.css">
+  <link rel="stylesheet" href="{{STATIC_URL}}stylesheets/post.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 
   <!-- Optional theme -->
@@ -21,11 +22,14 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="{{STATIC_URL}}scripts/jquery.cookie.js"></script>
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
   <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+  <script src="{{STATIC_URL}}scripts/post.js"></script>
 
   <title>{% block title %}MovieDB, find the movie  {% endblock %}</title>
 </head>

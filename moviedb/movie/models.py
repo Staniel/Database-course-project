@@ -48,7 +48,7 @@ class Favorite(models.Model):
 	mid = models.ForeignKey(Movie)
 
 class Post(models.Model):
-	uid = models.ForeignKey(User)
+	user = models.ForeignKey(User)
 	content = models.TextField(max_length = 5000, blank = True)
 	date = models.DateField()
 
@@ -56,5 +56,5 @@ class Topic(Post):
 	title = models.CharField(max_length = 100)
 
 class Comment(Post):
-	post_belong_id = models.ForeignKey(Topic)
+	post_belong = models.ForeignKey(Topic)
 

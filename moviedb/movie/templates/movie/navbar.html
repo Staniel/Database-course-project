@@ -16,7 +16,7 @@
       <li><a href="#">My favorite movie</a></li> 
       <li><a href="#">My watched movie</a></li> 
       {%endif%}
-      <li><a href="#">Discuss board</a></li> 
+      <li><a href="{% url 'moviedb:listpost' %}">Discuss board</a></li> 
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Welcome, {{username}}</a></li>
