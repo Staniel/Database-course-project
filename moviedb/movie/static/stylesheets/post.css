@@ -6,6 +6,11 @@
 	position: absolute;
 	right: 1em;
 	display: none;
+	font-size: 1.5em;
+}
+
+#postlist .remove-button:hover {
+	text-decoration: none;
 }
 
 #new-post-modal .modal-footer div {
@@ -25,6 +30,10 @@
 	right: 1em;
 	display: none;
 	font-size: 1.5em;
+}
+
+#commentlist .remove-button:hover {
+	text-decoration: none;
 }
 
 #new-comment-modal .modal-footer div, #modify-post-modal .modal-footer div {
